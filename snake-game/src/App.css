@@ -1,8 +1,40 @@
 .main-content {
+  margin: 0;
   display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  align-items: center;
   flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
-  width: 100%;
+}
+.start-button {
+  background-color: #1a1a1a;
+  border-color: white;
+  color: white;
+  font-size: 5vh;
+  padding: 2vh 5vh;
+  border-radius: 1vh;
+  margin-top: 5vh;
+}
+
+.square button {
+  width: 6vh;
+  height: 6vh;
+  background-color: #1b1b1b1b;
+  border-color: rgb(58, 58, 58);
+  border-radius: 1vh;
+  margin: 0.5vh;
+}
+
+.square .snake {
+  background-color: #3eff37;
+  border-color: #3eff37;
+}
+
+.square .apple {
+  background-color: #ff3939;
+  border-color: #ff3939;
 }
