@@ -1,3 +1,4 @@
+// store/gameSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 
 const BOARD_SIZE = 10;
@@ -11,6 +12,7 @@ const gameSlice = createSlice({
       Start: "Pause",
       Pause: "Resume",
       Resume: "Pause",
+      Restart: "Pause",
     },
     // Game objects
     snake: [
@@ -40,8 +42,6 @@ const gameSlice = createSlice({
 
     // Game objects actions
     moveSnake(state) {
-      // if (state.status === "Pause") return;
-
       let { x, y } = state.snakeHead;
 
       // 1. Определяем новые координаты головы
@@ -62,13 +62,13 @@ const gameSlice = createSlice({
 
       // 2. Проверка выхода за границы
       if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
-        state.status = "Start";
+        state.status = "Restart";
         return;
       }
 
       // 3. Проверка столкновения с телом
       if (state.snake.some((segment) => segment.x === x && segment.y === y)) {
-        state.status = "Start";
+        state.status = "Restart";
         return;
       }
 
@@ -79,9 +79,12 @@ const gameSlice = createSlice({
     },
 
     checkBestScore(state) {
-      if (state.status === "Start") {
+      if (state.status === "Restart") {
         const currentScore = state.snake.length;
-        if (currentScore >= state.bestScore) state.bestScore = currentScore;
+        console.log(currentScore);
+        if (currentScore > state.bestScore) {
+          state.bestScore = currentScore;
+        }
       }
     },
 
@@ -134,4 +137,5 @@ export const {
   checkBestScore,
   updateValues,
 } = gameSlice.actions;
+
 export const gameReducer = gameSlice.reducer;

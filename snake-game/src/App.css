@@ -8,6 +8,7 @@
   flex-direction: column;
   text-align: center;
   align-items: center;
+  gap: 5vh;
   justify-content: center;
 }
 .start-button {
@@ -17,7 +18,26 @@
   font-size: 5vh;
   padding: 2vh 5vh;
   border-radius: 1vh;
-  margin-top: 5vh;
+}
+
+.board.game-over {
+  opacity: 0.5;
+  pointer-events: none;
+  position: relative;
+}
+
+.board.game-over::after {
+  content: "Game Over";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: bold;
+  color: red;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1rem 2rem;
+  border-radius: 8px;
 }
 
 .square button {

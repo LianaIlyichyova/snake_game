@@ -1,23 +1,31 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 import Square from "../Square";
 
 const Board = () => {
-  const squares = [];
+  const [gameOver, setGameOver] = useState(false);
+  const status = useSelector((state: RootState) => state.game.status);
 
-  for (let y = 0; y < 10; y++) {
-    for (let x = 0; x < 10; x++) {
-      squares.push({ x, y, index: "" + x + y });
-    }
-  }
+  // Update gameOver when status changes
+  useEffect(() => {
+    setGameOver(status === "Restart");
+  }, [status]);
+
+  // Precompute squares once
+  const squares = Array.from({ length: 10 * 10 }, (_, index) => {
+    const x = index % 10;
+    const y = Math.floor(index / 10);
+    return { x, y, index: `${x}${y}` };
+  });
 
   return (
-    <div className="board">
-      {squares.map((square) => {
-        return (
-          <span key={square.index}>
-            <Square square={square} />
-          </span>
-        );
-      })}
+    <div className={`board ${gameOver ? "game-over" : ""}`}>
+      {squares.map((square) => (
+        <span key={square.index}>
+          <Square square={square} />
+        </span>
+      ))}
     </div>
   );
 };
