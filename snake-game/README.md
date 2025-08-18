@@ -10,9 +10,8 @@ The game is controlled with **keyboard arrows** or **buttons**, and has pause/re
 - Start, Pause, Resume, Restart the game
 - Snake grows when it eats an apple
 - Speed increases every time you eat an apple
+- **Game Over** screen when snake hits wall or itself
 - Best score is saved during session
-- Uses **Redux Toolkit** for game state
-- Built with **Vite** for fast development
 
 ---
 
