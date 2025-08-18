@@ -1,22 +1,19 @@
-import { useDispatch } from "react-redux";
-import { saveKey } from "./store/gameSlice";
 import Board from "./components/Board";
 import Score from "./components/Score";
 
-import type { AppDispatch } from "./store";
 import Status from "./components/Status";
 
-function App() {
-  const dispatch = useDispatch<AppDispatch>();
-  const keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    dispatch(saveKey(event.key));
-  };
+import useGameControls from "./hooks/useGameControls";
 
+import "./App.css";
+
+function App() {
+  const { clickHandler } = useGameControls();
   return (
-    <div className="main-content" onKeyDownCapture={keyDownHandler}>
+    <div className="app">
       <Score />
       <Board />
-      <Status />
+      <Status clickHandler={clickHandler} />
     </div>
   );
 }

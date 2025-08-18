@@ -1,20 +1,11 @@
-// store/gameSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
-
-const BOARD_SIZE = 10;
+import { STATUS_VALUES, BOARD_SIZE, STOP_KEY_COMBINATIONS } from "../constants";
 
 const gameSlice = createSlice({
   name: "game",
   initialState: {
-    // Game status
     status: "Start",
-    statusValues: {
-      Start: "Pause",
-      Pause: "Resume",
-      Resume: "Pause",
-      Restart: "Pause",
-    },
-    // Game objects
+
     snake: [
       { x: 0, y: 0 },
       { x: 1, y: 0 },
@@ -22,29 +13,23 @@ const gameSlice = createSlice({
     snakeHead: { x: 1, y: 0 },
     snakeSize: 2,
     bestScore: 0,
+    speed: 700,
     apple: { x: 1, y: 1 },
-    // Direction controller
     direction: "ArrowRight",
-    stopKeyCombinations: [
-      ["ArrowUp", "ArrowDown"],
-      ["ArrowDown", "ArrowUp"],
-      ["ArrowLeft", "ArrowRight"],
-      ["ArrowRight", "ArrowLeft"],
-    ],
+
     savedKey: "ArrowRight",
   },
   reducers: {
-    // Game status actions
+    // switch to next status (Start → Pause → Resume → Restart)
     changeStatus(state) {
-      const key = state.status as keyof typeof state.statusValues;
-      state.status = state.statusValues[key];
+      const key = state.status as keyof typeof STATUS_VALUES;
+      state.status = STATUS_VALUES[key];
     },
 
-    // Game objects actions
+    // move snake in current direction, check walls and self-hit
     moveSnake(state) {
       let { x, y } = state.snakeHead;
 
-      // 1. Определяем новые координаты головы
       switch (state.direction) {
         case "ArrowRight":
           x += 1;
@@ -60,34 +45,35 @@ const gameSlice = createSlice({
           break;
       }
 
-      // 2. Проверка выхода за границы
+      // game over if snake goes out of board
       if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
         state.status = "Restart";
         return;
       }
 
-      // 3. Проверка столкновения с телом
+      // game over if snake bites itself
       if (state.snake.some((segment) => segment.x === x && segment.y === y)) {
         state.status = "Restart";
         return;
       }
 
-      // 4. Двигаем змею
+      // move head forward
       state.snakeHead = { x, y };
       state.snake.push({ x, y });
       state.snake = state.snake.slice(-state.snakeSize);
     },
 
+    // save best score
     checkBestScore(state) {
       if (state.status === "Restart") {
         const currentScore = state.snake.length;
-        console.log(currentScore);
         if (currentScore > state.bestScore) {
           state.bestScore = currentScore;
         }
       }
     },
 
+    // reset values when restart
     updateValues(state) {
       state.snake = [
         { x: 0, y: 0 },
@@ -98,8 +84,10 @@ const gameSlice = createSlice({
       state.apple = { x: 1, y: 1 };
       state.direction = "ArrowRight";
       state.savedKey = "ArrowRight";
+      state.speed = 700;
     },
 
+    // check if snake eats apple - grow  + faster speed
     checkApple(state) {
       const { apple, snakeHead, snake } = state;
       if (apple.x === snakeHead.x && apple.y === snakeHead.y) {
@@ -111,12 +99,13 @@ const gameSlice = createSlice({
         } while (isOnSnake);
         state.apple = { ...apple };
         state.snakeSize++;
+        state.speed -= 25;
       }
     },
 
-    // Direction controller actions
+    // save last pressed arrow key handle last direction at pause
     saveKey(state, action) {
-      for (const [a, b] of state.stopKeyCombinations) {
+      for (const [a, b] of STOP_KEY_COMBINATIONS) {
         if (a === state.direction && b === action.payload) return;
       }
       state.savedKey = action.payload;

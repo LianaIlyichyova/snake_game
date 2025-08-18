@@ -1,4 +1,4 @@
-.main-content {
+.app {
   margin: 0;
   display: flex;
   place-items: center;
@@ -11,13 +11,28 @@
   gap: 5vh;
   justify-content: center;
 }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  width: 90vmin;
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  gap: 0.5vh;
+}
+
 .start-button {
   background-color: #1a1a1a;
-  border-color: white;
-  color: white;
+  border-color: rgba(255, 255, 255, 0.8);
   font-size: 5vh;
   padding: 2vh 5vh;
   border-radius: 1vh;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  border-color: #ff3939;
 }
 
 .board.game-over {
@@ -34,27 +49,26 @@
   transform: translate(-50%, -50%);
   font-size: 2rem;
   font-weight: bold;
-  color: red;
+  color: #ff3939;
   background: rgba(255, 255, 255, 0.8);
   padding: 1rem 2rem;
   border-radius: 8px;
 }
 
-.square button {
-  width: 6vh;
-  height: 6vh;
+.square {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgb(58, 58, 58);
   background-color: #1b1b1b1b;
-  border-color: rgb(58, 58, 58);
-  border-radius: 1vh;
-  margin: 0.5vh;
+  border-radius: 8px;
 }
 
-.square .snake {
+.snake {
   background-color: #3eff37;
   border-color: #3eff37;
 }
 
-.square .apple {
+.apple {
   background-color: #ff3939;
   border-color: #ff3939;
 }
