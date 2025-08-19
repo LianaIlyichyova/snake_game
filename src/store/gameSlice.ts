@@ -12,8 +12,8 @@ const gameSlice = createSlice({
     ],
     snakeHead: { x: 1, y: 0 },
     snakeSize: 2,
-    bestScore: 0,
-    speed: 700,
+    bestScore: 2,
+    speed: 900,
     apple: { x: 1, y: 1 },
     direction: "ArrowRight",
 
@@ -66,9 +66,8 @@ const gameSlice = createSlice({
     // save best score
     checkBestScore(state) {
       if (state.status === "Restart") {
-        const currentScore = state.snake.length;
-        if (currentScore > state.bestScore) {
-          state.bestScore = currentScore;
+        if (state.snakeSize > state.bestScore) {
+          state.bestScore = state.snakeSize;
         }
       }
     },

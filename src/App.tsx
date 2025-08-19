@@ -1,17 +1,16 @@
-import Board from "./components/Board";
-import Score from "./components/Score";
-
-import Status from "./components/Status";
-
 import useGameControls from "./hooks/useGameControls";
 
-import "./App.css";
+import Header from "./components/Header";
+import Board from "./components/Board";
+import Status from "./components/Status";
+
+import "./App.scss";
 
 function App() {
   const { clickHandler } = useGameControls();
   return (
     <div className="app">
-      <Score />
+      <Header />
       <Board />
       <Status clickHandler={clickHandler} />
     </div>

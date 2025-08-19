@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "../store";
+
 import Square from "./Square";
+
+import type { RootState } from "../store";
 
 import { BOARD_SIZE } from "../constants";
 
@@ -21,7 +23,7 @@ const Board = () => {
   }
 
   return (
-    <div className={`board ${gameOver ?? "game-over"}`}>
+    <div className={`board ${gameOver ? "game-over" : ""}`}>
       {squares.map((square) => (
         <span key={square.index}>
           <Square square={square} />
