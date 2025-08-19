@@ -47,9 +47,9 @@ const useGameControls = () => {
     }
   }, [speed, startTimer]);
 
-  // stop timer if game is over
+  // stop timer if game is over or paused
   useEffect(() => {
-    if (status === "Restart") {
+    if (status === "Restart" || status === "Resume") {
       stopTimer();
     }
   }, [status]);

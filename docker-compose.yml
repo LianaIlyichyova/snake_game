@@ -1,9 +1,12 @@
-version: "3.9"
-
 services:
-  snake-game:
+  vite-app:
     build: .
     ports:
-      - "4173:4173"
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
     environment:
-      - NODE_ENV=production
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true

@@ -35,11 +35,13 @@ The game is controlled with **keyboard arrows** or **buttons**, and has pause/re
 
 ## 📦 Installation
 
-Clone the repo and install dependencies:
+Clone the repo and install dependencies and run :
 
 ```bash
 git clone https://github.com/your-username/snake-game.git
 cd snake-game
 npm install
 npm run dev
+
+docker-compose up --build
 ```

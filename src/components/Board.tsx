@@ -21,7 +21,7 @@ const Board = () => {
   }
 
   return (
-    <div className={`board ${gameOver ?? "game-over"}`}>
+    <div className={`board ${gameOver ? "game-over" : ""}`}>
       {squares.map((square) => (
         <span key={square.index}>
           <Square square={square} />

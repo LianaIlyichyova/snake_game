@@ -7,6 +7,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: calc(10px+2vmin);
+  font-size: calc(10px + 2vmin);
   width: 100vw;
 }

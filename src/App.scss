@@ -1,0 +1,166 @@
+// Variables
+
+$color-bg: #1a1a1a;
+$color-text-border: rgba(255, 255, 255, 0.8);
+$color-accent: #ff3939;
+$color-snake: #3eff37;
+$color-square-border: rgb(58, 58, 58);
+
+$radius-sm: 8px;
+$radius-md: 12px;
+
+$shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+$font-size-header: calc(10px + 0.7vmin);
+$font-size-game-over: 2rem;
+
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+
+// Styles
+
+.app {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 5vh;
+  text-align: center;
+
+  width: 70vmin; // responsive width
+  max-width: 600px;
+
+  .board {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    gap: 0.5vh;
+
+    &.game-over {
+      opacity: 0.5;
+      pointer-events: none;
+      position: relative;
+
+      &::after {
+        content: "Game Over";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: $font-size-game-over;
+        font-weight: bold;
+        color: $color-accent;
+        background: $color-text-border;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $radius-sm;
+      }
+    }
+  }
+
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5vh;
+    font-size: $font-size-header;
+
+    .best-score {
+      font-weight: 700;
+    }
+  }
+
+  .help-button {
+    background-color: transparent;
+    border-color: transparent;
+    fill: $color-text-border;
+  }
+
+  .help-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    .help-modal {
+      background: $color-bg;
+      color: $color-text-border;
+      padding: $spacing-md;
+      border-radius: $radius-md;
+      max-width: 300px;
+      box-shadow: $shadow-lg;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+      text-align: center;
+
+      button {
+        background: $color-accent;
+        border: none;
+        color: $color-text-border;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $radius-sm;
+        cursor: pointer;
+      }
+
+      .controls-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+
+        .controls {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: $spacing-xs;
+        }
+
+        .row {
+          display: flex;
+          gap: $spacing-sm;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .start-button {
+    background-color: $color-bg;
+    border-color: $color-text-border;
+    font-size: 5vh;
+    padding: 2vh 5vh;
+    border-radius: 1vh;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-accent;
+    }
+  }
+
+  .square {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid $color-square-border;
+    background-color: rgba(27, 27, 27, 0.1);
+    border-radius: $radius-sm;
+
+    &.snake {
+      background-color: $color-snake;
+      border-color: $color-snake;
+    }
+
+    &.apple {
+      background-color: $color-accent;
+      border-color: $color-accent;
+    }
+  }
+}
