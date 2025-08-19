@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 
-import type { RootState } from "../store";
 import Help from "./Help";
+
+import type { RootState } from "../store";
 
 const Header = () => {
   const bestScore = useSelector((state: RootState) => state.game.bestScore);

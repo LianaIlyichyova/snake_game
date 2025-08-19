@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleInfo,
@@ -9,8 +11,9 @@ import {
   faKeyboard,
   faArrowTurnDown,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
+
 import type { RootState } from "../store";
+
 import { changeStatus } from "../store/gameSlice";
 
 const Help = () => {

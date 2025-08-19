@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "../store";
+
 import Square from "./Square";
+
+import type { RootState } from "../store";
 
 import { BOARD_SIZE } from "../constants";
 

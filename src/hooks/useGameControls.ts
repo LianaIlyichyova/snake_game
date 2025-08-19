@@ -1,3 +1,5 @@
+import { useRef, useEffect, useCallback } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeStatus,
@@ -10,7 +12,7 @@ import {
 } from "../store/gameSlice";
 
 import type { AppDispatch, RootState } from "../store";
-import { useRef, useEffect, useCallback } from "react";
+
 import { DIRECTION_KEYS, STATUS_KEYS } from "../constants";
 
 const useGameControls = () => {
