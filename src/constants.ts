@@ -1,6 +1,6 @@
 const BOARD_SIZE = 10;
 
-const STATUS_KEYS = ["ENTER", " "];
+const STATUS_KEYS = ["Enter", " "];
 
 const DIRECTION_KEYS = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
